@@ -8,3 +8,13 @@ body {
 }
 
 /* Sample Styles  */
+.single {
+  border: 2px solid purple;
+  border-radius: 10px;
+  width: 150px;
+  height: 80px;
+  text-align: center;
+  padding-top: 35px;
+  margin: 10px;
+  display: inline-block;
+}
