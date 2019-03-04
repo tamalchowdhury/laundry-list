@@ -14,7 +14,7 @@ const Layout = ({ clothes }) => {
       <button onClick={toggleModal}>Add New Item</button>
       <div className="items-area">
         {clothes.map((item, index) => (
-          <Single key={index} name={item} />
+          <Single key={index} item={item} />
         ))}
       </div>
     </div>

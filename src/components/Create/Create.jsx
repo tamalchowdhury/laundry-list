@@ -6,9 +6,13 @@ import PropTypes from 'prop-types';
 const Create = (props) => {
   function createItem(event) {
     event.preventDefault();
-    let name = event.target.name.value.trim();
-    if (name) {
-      props.dispatch({ type: 'CREATE', name });
+    let item = {};
+    item.name = event.target.name.value.trim();
+    item.comment = event.target.comment.value.trim();
+    item.date = event.target.date.value || Date();
+
+    if (item.name) {
+      props.dispatch({ type: 'CREATE', item });
       props.toggleModal(false);
       event.target.reset();
     }
@@ -34,7 +38,7 @@ const Create = (props) => {
           />
 
           <label htmlFor="comments">Comments: (Optional)</label>
-          <textarea className="item-comments" name="comments" rows="2" />
+          <textarea className="item-comment" name="comment" rows="2" />
 
           <label htmlFor="date">Pick a Date: (Default is Current)</label>
           <input className="item-date" type="date" name="date" />
