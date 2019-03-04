@@ -17,5 +17,64 @@
   border: 1px solid #888;
   border-radius: 10px;
   width: 400px;
-  max-width: 80%;
+  max-width: 90%;
+  position: relative;
+}
+
+.close-button {
+  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -10px;
+  margin-right: -10px;
+  background: #f55314;
+  border: 0;
+  color: #ffffff;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#modal-title {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.form input {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.item-title,
+.item-comments {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+
+.form label {
+  text-transform: uppercase;
+  color: #888888;
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+}
+
+.button-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.create-button {
+  background: var(--button-color);
+  border: 0;
+  font-size: 1.5rem;
+  padding: 10px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
 }

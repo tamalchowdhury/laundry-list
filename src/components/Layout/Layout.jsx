@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Layout = ({ clothes }) => {
   // Local State for modal
-  const [modal, toggleModal] = useState(false);
+  const [modal, toggleModal] = useState(true);
   return (
     <div className="layout">
       {modal ? <Create toggleModal={toggleModal} /> : ''}

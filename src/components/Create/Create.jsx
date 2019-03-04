@@ -17,11 +17,30 @@ const Create = (props) => {
   return (
     <div class="modal">
       <div className="modal-content">
-        <button onClick={() => props.toggleModal(false)}>Close</button>
-        <h1>Add a new item</h1>
-        <form onSubmit={createItem}>
-          <input name="name" type="text" />
-          <button>Create</button>
+        <button
+          className="close-button"
+          onClick={() => props.toggleModal(false)}>
+          &times;
+        </button>
+        <h1 id="modal-title">Add a new item</h1>
+        <form class="form" onSubmit={createItem}>
+          <label htmlFor="name">Item Name:</label>
+          <input
+            className="item-title"
+            type="text"
+            name="name"
+            placeholder="Red Tee Shirt"
+            autoFocus
+          />
+
+          <label htmlFor="comments">Comments: (Optional)</label>
+          <textarea className="item-comments" name="comments" rows="2" />
+
+          <label htmlFor="date">Pick a Date: (Default is Current)</label>
+          <input className="item-date" type="date" name="date" />
+          <div className="button-container">
+            <button className="create-button">Add</button>
+          </div>
         </form>
       </div>
     </div>
