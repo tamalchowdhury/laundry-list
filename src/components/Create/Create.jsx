@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './create.css';
+import Camera from '../../img/camera.png';
+import Gallery from '../../img/gallery.png';
 import PropTypes from 'prop-types';
 
 const Create = (props) => {
@@ -42,6 +44,24 @@ const Create = (props) => {
 
           <label htmlFor="date">Pick a Date: (Default is Current)</label>
           <input className="item-date" type="date" name="date" />
+          <label htmlFor="image">Choose an image:</label>
+          <div className="image-area">
+            <div className="gallery">
+              <div>
+                <button className="gallery-button">
+                  <img src={Gallery} width="64" alt="" />
+                </button>
+                <input type="file" name="" id="" />
+              </div>
+              Gallery
+            </div>
+            <div className="camera">
+              <div>
+                <img src={Camera} width="64" alt="" />
+              </div>
+              Camera
+            </div>
+          </div>
           <div className="button-container">
             <button className="create-button">Add</button>
           </div>

@@ -78,3 +78,38 @@
   display: block;
   width: 100%;
 }
+
+.image-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #efefef;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.gallery {
+  border-right: 1px solid #666666;
+}
+
+/* Gallery upload button  */
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.gallery-button {
+  background: none;
+  border: 0;
+  display: inline;
+}
+
+.gallery input[type='file'] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
