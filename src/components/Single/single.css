@@ -1,0 +1,7 @@
+.single {
+  border: 2px solid purple;
+  border-radius: 10px;
+  height: 100px;
+  text-align: center;
+  background-size: cover;
+}

@@ -31,12 +31,6 @@ body {
 }
 
 /* Sample Styles  */
-.single {
-  border: 2px solid purple;
-  border-radius: 10px;
-  height: 100px;
-  text-align: center;
-}
 
 @media screen and (max-width: 800px) {
   .items-area {

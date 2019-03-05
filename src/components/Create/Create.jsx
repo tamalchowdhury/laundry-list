@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import './create.css';
 import Camera from '../../img/camera.png';
@@ -6,24 +6,27 @@ import Gallery from '../../img/gallery.png';
 import PropTypes from 'prop-types';
 
 const Create = (props) => {
+  const [isImage, change] = useState(false);
+  const [previewImage, upImage] = useState(undefined);
+
   function createItem(event) {
     event.preventDefault();
     let item = {};
     item.name = event.target.name.value.trim();
     item.comment = event.target.comment.value.trim();
     item.date = event.target.date.value || Date();
+    item.image = previewImage;
 
     // If there is an image, then capture it
-    if (event.target.gallery.value) {
-      getBase64(event.target.gallery.files[0]).then((imageData) => {
-        console.log('Ready for sending to the state.');
-        item.image = imageData;
-      });
-    }
+    // if (event.target.gallery) {
+    //   getBase64(event.target.gallery.files[0]).then((imageData) => {
+    //     item.image = imageData;
+    //   });
+    // }
     if (item.name) {
       props.dispatch({ type: 'CREATE', item });
-      props.toggleModal(false);
       event.target.reset();
+      props.toggleModal(false);
     }
   }
 
@@ -47,12 +50,9 @@ const Create = (props) => {
 
   function uploadImage(event) {
     console.log('Uploading an image.');
-    console.log(event.currentTarget.files[0]);
-
-    // getBase64(event.currentTarget.files[0]).then((imageData) => {
-    //   console.log(imageData);
-    //   // editor.command(insertImage, imageData);
-    // });
+    getBase64(event.currentTarget.files[0]).then((imageData) => {
+      upImage(imageData);
+    });
   }
 
   return (
@@ -81,26 +81,35 @@ const Create = (props) => {
           <input className="item-date" type="date" name="date" />
           <label htmlFor="image">Choose an image:</label>
           <div className="image-area">
-            <div className="gallery">
-              <div>
-                <button className="gallery-button">
-                  <img src={Gallery} width="64" alt="" />
-                </button>
-                <input
-                  type="file"
-                  name="gallery"
-                  id=""
-                  onChange={uploadImage}
-                />
+            {previewImage ? (
+              <div className="preview-image">
+                <button onClick={() => upImage()}>Cancel</button>
+                <img src={previewImage} />
               </div>
-              Gallery
-            </div>
-            <div className="camera">
-              <div>
-                <img src={Camera} width="64" alt="" />
-              </div>
-              Camera
-            </div>
+            ) : (
+              <Fragment>
+                <div className="gallery">
+                  <div>
+                    <button className="gallery-button">
+                      <img src={Gallery} width="64" alt="" />
+                    </button>
+                    <input
+                      type="file"
+                      name="gallery"
+                      id=""
+                      onChange={uploadImage}
+                    />
+                  </div>
+                  Gallery
+                </div>
+                <div className="camera">
+                  <div>
+                    <img src={Camera} width="64" alt="" />
+                  </div>
+                  Camera
+                </div>
+              </Fragment>
+            )}
           </div>
           <div className="button-container">
             <button className="create-button">Add</button>

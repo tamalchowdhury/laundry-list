@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './single.css';
 
 const Single = ({ item }) => {
   let { name, comment, date, image } = item;
   return (
-    <div className="single">
+    <div className="single" style={{ backgroundImage: `url(${image})` }}>
       <p>{name}</p>
-      <img src={`${image}`} alt={name} />
-      <p>
-        {comment}, {date}
-      </p>
     </div>
   );
 };

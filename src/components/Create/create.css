@@ -113,3 +113,8 @@
   top: 0;
   opacity: 0;
 }
+
+.preview-image img {
+  width: 200px;
+  height: auto;
+}
