@@ -13,6 +13,13 @@ const Create = (props) => {
     item.comment = event.target.comment.value.trim();
     item.date = event.target.date.value || Date();
 
+    // If there is an image, then capture it
+    if (event.target.gallery.value) {
+      getBase64(event.target.gallery.files[0]).then((imageData) => {
+        console.log('Ready for sending to the state.');
+        item.image = imageData;
+      });
+    }
     if (item.name) {
       props.dispatch({ type: 'CREATE', item });
       props.toggleModal(false);
@@ -20,8 +27,36 @@ const Create = (props) => {
     }
   }
 
+  const getBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      const allowedTypes = [
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/gif'
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        window.alert('Only jpg, png & gif image files are allowed!');
+        return;
+      }
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  function uploadImage(event) {
+    console.log('Uploading an image.');
+    console.log(event.currentTarget.files[0]);
+
+    // getBase64(event.currentTarget.files[0]).then((imageData) => {
+    //   console.log(imageData);
+    //   // editor.command(insertImage, imageData);
+    // });
+  }
+
   return (
-    <div class="modal">
+    <div className="modal">
       <div className="modal-content">
         <button
           className="close-button"
@@ -29,7 +64,7 @@ const Create = (props) => {
           &times;
         </button>
         <h1 id="modal-title">Add a new item</h1>
-        <form class="form" onSubmit={createItem}>
+        <form className="form" onSubmit={createItem}>
           <label htmlFor="name">Item Name:</label>
           <input
             className="item-title"
@@ -51,7 +86,12 @@ const Create = (props) => {
                 <button className="gallery-button">
                   <img src={Gallery} width="64" alt="" />
                 </button>
-                <input type="file" name="" id="" />
+                <input
+                  type="file"
+                  name="gallery"
+                  id=""
+                  onChange={uploadImage}
+                />
               </div>
               Gallery
             </div>
