@@ -79,9 +79,12 @@
   width: 100%;
 }
 
-.image-area {
+.grid-area {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.image-area {
   background: #efefef;
   padding: 20px;
   border-radius: 10px;

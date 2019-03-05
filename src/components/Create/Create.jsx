@@ -6,7 +6,6 @@ import Gallery from '../../img/gallery.png';
 import PropTypes from 'prop-types';
 
 const Create = (props) => {
-  const [isImage, change] = useState(false);
   const [previewImage, upImage] = useState(undefined);
 
   function createItem(event) {
@@ -17,12 +16,6 @@ const Create = (props) => {
     item.date = event.target.date.value || Date();
     item.image = previewImage;
 
-    // If there is an image, then capture it
-    // if (event.target.gallery) {
-    //   getBase64(event.target.gallery.files[0]).then((imageData) => {
-    //     item.image = imageData;
-    //   });
-    // }
     if (item.name) {
       props.dispatch({ type: 'CREATE', item });
       event.target.reset();
@@ -83,11 +76,11 @@ const Create = (props) => {
           <div className="image-area">
             {previewImage ? (
               <div className="preview-image">
-                <button onClick={() => upImage()}>Cancel</button>
                 <img src={previewImage} />
+                <button onClick={() => upImage()}>Cancel</button>
               </div>
             ) : (
-              <Fragment>
+              <div className="grid-area">
                 <div className="gallery">
                   <div>
                     <button className="gallery-button">
@@ -108,7 +101,7 @@ const Create = (props) => {
                   </div>
                   Camera
                 </div>
-              </Fragment>
+              </div>
             )}
           </div>
           <div className="button-container">
