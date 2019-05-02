@@ -57,6 +57,15 @@
   padding: 10px;
 }
 
+.req-error {
+  border: 2px solid #f55314;
+}
+
+.red-error {
+  color: #f55314;
+  text-transform: uppercase;
+}
+
 .form label {
   text-transform: uppercase;
   color: #888888;

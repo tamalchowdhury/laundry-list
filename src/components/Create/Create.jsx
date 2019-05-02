@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 const Create = (props) => {
   const [previewImage, upImage] = useState(undefined);
+  const [inputError, changeInput] = useState(false);
 
   function createItem(event) {
     event.preventDefault();
@@ -20,6 +21,8 @@ const Create = (props) => {
       props.dispatch({ type: 'CREATE', item });
       event.target.reset();
       props.toggleModal(false);
+    } else {
+      changeInput(true);
     }
   }
 
@@ -58,13 +61,21 @@ const Create = (props) => {
         </button>
         <h1 id="modal-title">Add a new item</h1>
         <form className="form" onSubmit={createItem}>
-          <label htmlFor="name">Item Name:</label>
+          <label htmlFor="name">
+            {inputError ? (
+              <span className="red-error">Item name is required!</span>
+            ) : (
+              'Item Name:'
+            )}
+          </label>
+
           <input
-            className="item-title"
+            className={`item-title ${inputError ? 'req-error' : null}`}
             type="text"
             name="name"
             placeholder="Red Tee Shirt"
             autoFocus
+            onChange={() => changeInput(false)}
           />
 
           <label htmlFor="comments">Comments: (Optional)</label>
