@@ -7,7 +7,6 @@ import './styles/main.css';
 const App = (props) => {
   return (
     <Provider store={store}>
-      <h1>Laundry List</h1>
       <Layout />
     </Provider>
   );

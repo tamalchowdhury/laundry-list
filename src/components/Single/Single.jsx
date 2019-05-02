@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './single.css';
 
-const Single = ({ name }) => {
-  return <div className="single">{name}</div>;
+const Single = ({ item }) => {
+  let { name, comment, date, image } = item;
+  return (
+    <div className="single" style={{ backgroundImage: `url(${image})` }}>
+      <p>{name}</p>
+    </div>
+  );
 };
 
 Single.propTypes = {
-  name: PropTypes.string.isRequired
+  item: PropTypes.object.isRequired
 };
 
 export default Single;

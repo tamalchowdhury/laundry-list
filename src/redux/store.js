@@ -1,22 +1,15 @@
 import { createStore } from 'redux';
 
 const defaultState = {
-  clothes: [
-    'Red Jaguars',
-    'Blue Barracudas',
-    'Purple Parrots',
-    'Green Monkeys',
-    'Orangy Kuwalas',
-    'Silver Snakes'
-  ]
+  clothes: []
 };
 
 function reducer(state, action) {
-  let { type, name } = action;
+  let { type, item } = action;
   let clothes = [...state.clothes];
   switch (type) {
     case 'CREATE':
-      clothes.push(name);
+      clothes.push(item);
       return {
         clothes
       };
