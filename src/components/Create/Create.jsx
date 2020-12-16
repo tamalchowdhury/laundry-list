@@ -5,35 +5,53 @@ import Camera from '../../img/camera.png';
 import Gallery from '../../img/gallery.png';
 import PropTypes from 'prop-types';
 
+/**
+ * The create modal window to show up
+ */
 const Create = (props) => {
+  // Upload image file to the local state.
   const [previewImage, upImage] = useState(undefined);
+  // Local state to show input error
   const [inputError, changeInput] = useState(false);
 
+  // Take the info from modal and add the item to the redux store
   function createItem(event) {
     event.preventDefault();
+    // Create an empty item object to hold all data of the item
     let item = {};
+    // Set the name
     item.name = event.target.name.value.trim();
+    // Set the comment
     item.comment = event.target.comment.value.trim();
+    // Take the date or set the current time
     item.date = event.target.date.value || Date();
+    // Take the image data from local state
     item.image = previewImage;
 
+    // Continue only if there is a valid name
     if (item.name) {
+      // Add this item to the redux state with CREATE action
       props.dispatch({ type: 'CREATE', item });
+      // Reset the form
       event.target.reset();
+      // Reset the form
       props.toggleModal(false);
     } else {
+      // Else the name must be empty so trigger the error message
       changeInput(true);
     }
   }
 
-  const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
+  // Upload an image to base64 file
+  // Helper function
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       const allowedTypes = [
         'image/jpeg',
         'image/jpg',
         'image/png',
-        'image/gif'
+        'image/gif',
       ];
       if (!allowedTypes.includes(file.type)) {
         window.alert('Only jpg, png & gif image files are allowed!');
@@ -43,7 +61,9 @@ const Create = (props) => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
+  }
 
+  // Take file from the computer and store it into the state
   function uploadImage(event) {
     console.log('Uploading an image.');
     getBase64(event.currentTarget.files[0]).then((imageData) => {
@@ -52,6 +72,7 @@ const Create = (props) => {
   }
 
   return (
+    /** Show the modal window */
     <div className="modal">
       <div className="modal-content">
         <button
@@ -70,25 +91,21 @@ const Create = (props) => {
           </label>
 
           <input
-            className={`item-title ${inputError ? 'req-error' : null}`}
+            className={`item-title ${inputError ? 'required-error' : null}`}
             type="text"
             name="name"
             placeholder="Red Tee Shirt"
             autoFocus
             onChange={() => changeInput(false)}
           />
-
-          <label htmlFor="comments">Comments: (Optional)</label>
-          <textarea className="item-comment" name="comment" rows="2" />
-
-          <label htmlFor="date">Pick a Date: (Default is Current)</label>
-          <input className="item-date" type="date" name="date" />
           <label htmlFor="image">Choose an image:</label>
           <div className="image-area">
             {previewImage ? (
               <div className="preview-image">
                 <img src={previewImage} />
-                <button onClick={() => upImage()}>Cancel</button>
+                <button className="preview-close" onClick={() => upImage()}>
+                  &times;
+                </button>
               </div>
             ) : (
               <div className="grid-area">
@@ -115,6 +132,13 @@ const Create = (props) => {
               </div>
             )}
           </div>
+
+          <label htmlFor="date">Pick a Date: (Default is Current)</label>
+          <input className="item-date" type="date" name="date" />
+
+          <label htmlFor="comments">Comments: (Optional)</label>
+          <textarea className="item-comment" name="comment" rows="2" />
+
           <div className="button-container">
             <button className="create-button">Add</button>
           </div>

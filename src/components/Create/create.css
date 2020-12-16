@@ -12,11 +12,12 @@
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 5vh auto 0 auto;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 10px;
   width: 400px;
+  max-height: 95vh;
   max-width: 90%;
   position: relative;
 }
@@ -57,7 +58,7 @@
   padding: 10px;
 }
 
-.req-error {
+.required-error {
   border: 2px solid #f55314;
 }
 
@@ -129,4 +130,18 @@
 .preview-image img {
   width: 200px;
   height: auto;
+}
+
+.preview-close {
+  position: absolute;
+  margin: -10px;
+  float: right;
+  background: #333333;
+  color: #ffffff;
+  border: 0;
+  border-radius: 50%;
+}
+
+.preview-close:hover {
+  cursor: pointer;
 }

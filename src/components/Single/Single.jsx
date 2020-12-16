@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './single.css';
 
-const Single = ({ item }) => {
-  let { name, comment, date, image } = item;
+const Single = (props) => {
+  let { name, comment, date, image } = props.item;
   return (
     <div className="single" style={{ backgroundImage: `url(${image})` }}>
       <p>{name}</p>
